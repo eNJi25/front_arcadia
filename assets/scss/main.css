@@ -11862,4 +11862,9 @@ textarea.form-control-lg {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
 }/*# sourceMappingURL=main.css.map */
