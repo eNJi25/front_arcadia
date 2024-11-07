@@ -1,2 +1,9 @@
-@import 'variables';
+@import "variables";
+@import "navbar";
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
