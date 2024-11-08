@@ -1,6 +1,10 @@
 .navbar-brand {
   font-family: Pacifico;
   color: $success;
+
+  &:hover {
+    color: $success;
+  }
 }
 
 .navbar-toggler {
