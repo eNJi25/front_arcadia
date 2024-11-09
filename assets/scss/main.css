@@ -11862,8 +11862,8 @@ textarea.form-control-lg {
 }
 
 .hero-scene img {
-  max-height: 500px; /* Ajuste la hauteur de l'image */
-  object-fit: cover; /* Garde l'image bien proportionnée */
+  max-height: 500px;
+  object-fit: cover;
 }
 
 .card-img {
@@ -11890,4 +11890,10 @@ textarea.form-control-lg {
 
 a {
   text-decoration: none;
+}
+
+.img-habitat {
+  padding: 0 !important;
+  max-height: 350px;
+  object-fit: cover;
 }/*# sourceMappingURL=main.css.map */
