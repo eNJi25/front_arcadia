@@ -1,0 +1,22 @@
+.img-card {
+  position: relative;
+  img {
+    transition: all 0.3s;
+  }
+  .info-animal {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s;
+  }
+  &:hover {
+    img {
+      filter: brightness(0.3);
+    }
+    .info-animal {
+      opacity: 1;
+    }
+  }
+}

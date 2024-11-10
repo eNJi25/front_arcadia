@@ -11893,6 +11893,27 @@ textarea.form-control-lg {
   max-height: 450px;
 }
 
+.img-card {
+  position: relative;
+}
+.img-card img {
+  transition: all 0.3s;
+}
+.img-card .info-animal {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+}
+.img-card:hover img {
+  filter: brightness(0.3);
+}
+.img-card:hover .info-animal {
+  opacity: 1;
+}
+
 * {
   margin: 0;
   padding: 0;
