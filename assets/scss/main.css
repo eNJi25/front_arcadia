@@ -11869,6 +11869,18 @@ textarea.form-control-lg {
 .card-img {
   height: 300px;
   object-fit: cover;
+  transition: 0.3s;
+}
+
+.card:hover .card-img {
+  filter: brightness(0.3);
+}
+.card:hover div a {
+  opacity: 1;
+}
+
+.card div a {
+  opacity: 0;
 }
 
 .carousel .carousel-item {
