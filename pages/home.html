@@ -168,3 +168,32 @@
         <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#AvisModal">Donnez mon avis</button>
     </div>
 </section>
+
+<!-- Modal Avis -->
+
+<div class="modal fade" id="AvisModal" tabindex="-1" aria-labelledby="AvisModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5 text-secondary" id="AvisModalLabel">Votre avis compte pour nous</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="usernameInput" class="form-label text-primary fw-bold">Votre prénom</label>
+                        <input type="text" class="form-control" id="usernameInput" placeholder="Prénom">
+                    </div>
+                    <div class="mb-3">
+                        <label for="avisInput" class="form-label text-primary fw-bold">Votre avis</label>
+                        <textarea class="form-control" id="avisInput" rows="10"
+                            placeholder="Merci de prendre le temps pour nous laisser votre avis"></textarea>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-secondary">Envoyer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
