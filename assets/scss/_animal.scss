@@ -1,5 +1,16 @@
 .img-card {
   position: relative;
+  .action-image-buttons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: all 0.3s;
+  }
   img {
     transition: all 0.3s;
   }
@@ -15,7 +26,8 @@
     img {
       filter: brightness(0.3);
     }
-    .info-animal {
+    .info-animal,
+    .action-image-buttons {
       opacity: 1;
     }
   }

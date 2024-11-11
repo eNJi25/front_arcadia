@@ -11896,6 +11896,17 @@ textarea.form-control-lg {
 .img-card {
   position: relative;
 }
+.img-card .action-image-buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: all 0.3s;
+}
 .img-card img {
   transition: all 0.3s;
 }
@@ -11910,7 +11921,8 @@ textarea.form-control-lg {
 .img-card:hover img {
   filter: brightness(0.3);
 }
-.img-card:hover .info-animal {
+.img-card:hover .info-animal,
+.img-card:hover .action-image-buttons {
   opacity: 1;
 }
 
