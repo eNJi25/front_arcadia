@@ -40,11 +40,11 @@
                     <img class="w-100 rounded" src="../assets/images/animaux/savane/simba.jpg" alt="">
                     <div class="action-image-buttons" data-show="admin">
                         <button type="button" class="btn text-primary" data-bs-toggle="modal"
-                            data-bs-target="#EditModal"><i class="bi bi-pencil-square"></i></button>
+                            data-bs-target="#EditAnimalModal"><i class="bi bi-pencil-square"></i></button>
                         <button type="button" class="btn text-success" data-bs-toggle="modal"
-                            data-bs-target="#RapportModal"><i class="bi bi-file-medical"></i></button>
+                            data-bs-target="#RapportAnimalModal"><i class="bi bi-file-medical"></i></button>
                         <button type="button" class="btn text-danger" data-bs-toggle="modal"
-                            data-bs-target="#SuppressionModal"><i class="bi bi-trash"></i></button>
+                            data-bs-target="#SuppressionAnimalModal"><i class="bi bi-trash"></i></button>
                     </div>
                     <button id="info-animal" class="btn btn-secondary info-animal">En savoir plus</button>
                 </div>
@@ -361,6 +361,136 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal modification animal -->
+
+<div class="modal fade" id="EditAnimalModal" tabindex="-1" aria-labelledby="EditAnimalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5 fw-bold text-secondary" id="EdtAnimalModalLabel">Rapport Alimentaire
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="dateRepasInput" class="form-label text-primary fw-bold">Date du dernier
+                            repas</label>
+                        <input type="date" class="form-control" id="dateRepasInput" name="dateRepasInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="heureRepasInput" class="form-label text-primary fw-bold">Heure du dernier
+                            repas</label>
+                        <input type="time" class="form-control" id="heureRepasInput" name="heureRepasInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nourritureAnimalInput" class="form-label text-primary fw-bold">Nourriture
+                            donnée</label>
+                        <input type="text" class="form-control" name="nourritureAnimalInput" id="nourritureAnimalInput"
+                            placeholder="viandes, legumes, poisson ...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantitelInput" class="form-label text-primary fw-bold">Quantite donnée(en kg)
+                        </label>
+                        <input type="number" step="0.001" min="0" max="100" class="form-control" name="quantiteInput"
+                            id="quantiteInput" placeholder="0.250">
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn-primary text-white">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal rapport vétérinaire animal -->
+
+<div class="modal fade" id="RapportAnimalModal" tabindex="-1" aria-labelledby="RapportAnimalModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5 fw-bold text-secondary" id="RapportAnimalModalLabel">Rapport Animal
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="etatAnimalInput" class="form-label text-primary fw-bold">Etat de l'animal</label>
+                        <input type="text" class="form-control" id="etatAnimalInput" name="etatAnimalInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nourritureProposeInput" class="form-label text-primary fw-bold">Nourriture
+                            proposée</label>
+                        <input type="text" class="form-control" id="nourritureProposeInput"
+                            name="nourritureProposeInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantiteproposelInput" class="form-label text-primary fw-bold">Quantite proposée (en
+                            kg)
+                        </label>
+                        <input type="number" step="0.001" min="0" max="100" class="form-control"
+                            name="quantiteproposeInput" id="quantiteproposeInput" placeholder="0.250">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateRapportInput" class="form-label text-primary fw-bold">Date du rapport</label>
+                        <input type="date" class="form-control" id="dateRapportInput" name="dateRapportInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="detailEtatFacInput" class="form-label text-primary fw-bold">Détail de l'état de
+                            l'animal (facultatif) </label>
+                        <textarea class="form-control" id="detailEtatFacInputInput" name="detailEtatFacInputInput"
+                            rows="5"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="detailHabitatInput" class="form-label text-primary fw-bold">Détail sur l'état
+                            de l'habitat (facultatif) </label>
+                        <textarea class="form-control" id="detailHabitatInput" name="detailHabitatInput"
+                            rows="5"></textarea>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn-primary text-white">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Suppression Animal -->
+
+<div class="modal fade" id="SuppressionAnimalModal" tabindex="-1" aria-labelledby="SuppressionAnimalModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="SuppressionAnimalModalLabel">Êtes vous sûr de vouloir supprimer
+                    l'animal
+                    ?
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <p>Nom de l'animal</p>
+                        <img src="../assets/images/animaux/savane/simba.jpg" alt="" class="rounded w-100 ">
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-danger text-white">Supprimer</button>
+                        <button type="button" class="btn btn-secondary text-white "
+                            data-bs-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
