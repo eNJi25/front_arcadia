@@ -5,9 +5,25 @@
         <h1 class="p-5 position-absolute text-success d-lg-none text-center">Nos habitats</h1>
     </div>
 </section>
+<div class="border my-2 bg-success">
+    <h2 class="text-center fw-bold text-secondary">Espace administrateur</h2>
+    <div class="d-flex g-3 justify-content-center">
+        <div class="d-flex justify-content-center m-2 p-0">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AjoutAnimalModal"
+                id="savane">Ajouter un
+                animal</button>
+        </div>
+        <div class="d-flex justify-content-center m-2 p-0">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#AjoutModal"
+                id="savane">Modifier un service</button>
+        </div>
+    </div>
+</div>
+
+
 <section id="savane">
     <div class="container-fluid p-0">
-        <h2 class="text-center text-secondary my-3">Savane</h2>
+        <h2 class="text-center text-secondary mb-3">Savane</h2>
         <p class="text-primary text-center">La savane est un vaste paysage d'herbes sèches et d'arbres épars, baigné par
             un soleil brûlant. En saison
             sèche, la
@@ -18,10 +34,6 @@
             <img class="img-habitat" src="../assets/images/habitats/savane.jpg" alt="savane">
         </div>
         <h3 class="text-center text-secondary my-3">Animaux de la savane</h3>
-        <div class="d-flex justify-content-center m-0 p-0">
-            <button type="button" class="btn btn-primary">Ajouter un animal de la
-                savane</button>
-        </div>
         <div class="row m-2 g-3">
             <div class="col-sm-12 col-md-4 col-lg-3">
                 <div class="img-card">
@@ -98,10 +110,6 @@
             <img class="img-habitat" src="../assets/images/habitats/jungle.jpg" alt="jungle">
         </div>
         <h3 class="text-center text-secondary my-3">Animaux de la jungle</h3>
-        <div class="d-flex justify-content-center m-0 p-0">
-            <button type="button" class="btn btn-primary">Ajouter un animal de la
-                jungle</button>
-        </div>
         <div class="row m-2 g-3">
             <div class="col-sm-12 col-md-4 col-lg-3">
                 <div class="img-card">
@@ -180,9 +188,6 @@
             <img class="img-habitat" src="../assets/images/habitats/marais.jpg" alt="marais">
         </div>
         <h3 class="text-center text-secondary my-3">Animaux du marais</h3>
-        <div class="d-flex justify-content-center m-0 p-0">
-            <button type="button" class="btn btn-primary">Ajouter un animal du marais</button>
-        </div>
         <div class="row m-2 g-3">
             <div class="col-sm-12 col-md-4 col-lg-3">
                 <div class="img-card">
@@ -246,3 +251,57 @@
         </div>
     </div>
 </section>
+
+<!-- Modal Ajout d'animal -->
+
+<div class="modal fade" id="AjoutAnimalModal" tabindex="-1" aria-labelledby="AjoutAnimalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5 text-secondary fw-bold" id="AjoutAnimalModalLabel">Ajouter un animal</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="prenomAnimalInput" class="form-label text-primary fw-bold">Prénom de
+                            l'animal</label>
+                        <input type="text" class="form-control" id="nomAnimalInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nomServiceInput" class="form-label text-primary fw-bold">Race de l'animal</label>
+                        <input type="text" class="form-control" id="nomAnimalInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="PhotoAnimalInput" class="form-label text-primary fw-bold">Photo de l'animal</label>
+                        <input type="file" class="form-control" id="PhotoAnimalInput">
+                    </div>
+                    <h6 class="text-primary fw-bold">Habitat de l'animal</h6>
+                    <div class="mb-3 d-flex g-1 justify-content-between">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="habitatAnimal" id="savane">
+                            <label class="form-check-label" for="savane">
+                                Savane
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="habitatAnimal" id="jungle">
+                            <label class="form-check-label" for="jungle">
+                                Jungle
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="habitatAnimal" id="marais">
+                            <label class="form-check-label" for="marais">
+                                Jungle
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-secondary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
