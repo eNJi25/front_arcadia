@@ -1,1 +1,163 @@
-tableau de bord
+<div class="my-3 container d-flex justify-content-center align-items-center d-none d-lg-block">
+    <a class="btn btn-secondary m-2" href="#rapports">Rapports vétérinaires</a>
+    <a class="btn btn-secondary m-2" href="#consultations">Consultations par animaux</a>
+    <a class="btn btn-secondary m-2" href="#user">Création d'un nouvel utilisateur</a>
+    <a class="btn btn-secondary m-2" href="#avis">Avis</a>
+</div>
+<div class="my-3 container d-flex flex-column justify-content-center align-items-center d-lg-none">
+    <a class="btn btn-secondary m-2" href="#rapports">Rapports vétérinaires</a>
+    <a class="btn btn-secondary m-2" href="#consultations">Consultations par animaux</a>
+    <a class="btn btn-secondary m-2" href="#user">Création d'un nouvel utilisateur</a>
+    <a class="btn btn-secondary m-2" href="#avis">Avis</a>
+</div>
+
+<div class="container my-3 border border-secondary rounded" id="rapports">
+    <h2 class="text-secondary fw-bold display-5">Rapports vétérinaires</h2>
+    <div class="row m-2 g-3">
+        <div class="card my-3 col-sm-12 col-md-3 col-lg-3 p-0">
+            <img src="../assets/images/animaux/marais/ipo.jpg" class="card-img-top" alt="animal zoo">
+            <div class="card-body">
+                <h5 class="card-title">Ipo</h5>
+                <p class="card-text">11/10/2024</p>
+                <p class="card-text">Trés bon état</p>
+                <p class="card-text">Nourriture adapté mais résuire, passé à 0.500 kg</p>
+                <p class="card-text">Rien à ajouter</p>
+            </div>
+        </div>
+        <div class="card my-3 col-sm-12 col-md-3 col-lg-3 p-0">
+            <img src="../assets/images/animaux/marais/ipo.jpg" class="card-img-top" alt="animal zoo">
+            <div class="card-body">
+                <h5 class="card-title">Ipo</h5>
+                <p class="card-text">11/10/2024</p>
+                <p class="card-text">Trés bon état</p>
+                <p class="card-text">Nourriture adapté mais résuire, passé à 0.500 kg</p>
+                <p class="card-text">Rien à ajouter</p>
+            </div>
+        </div>
+        <div class="card my-3 col-sm-12 col-md-3 col-lg-3 p-0">
+            <img src="../assets/images/animaux/marais/ipo.jpg" class="card-img-top" alt="animal zoo">
+            <div class="card-body">
+                <h5 class="card-title">Ipo</h5>
+                <p class="card-text">11/10/2024</p>
+                <p class="card-text">Trés bon état</p>
+                <p class="card-text">Nourriture adapté mais résuire, passé à 0.500 kg</p>
+                <p class="card-text">Rien à ajouter</p>
+            </div>
+        </div>
+        <div class="card my-3 col-sm-12 col-md-3 col-lg-3 p-0">
+            <img src="../assets/images/animaux/marais/ipo.jpg" class="card-img-top" alt="animal zoo">
+            <div class="card-body">
+                <h5 class="card-title">Ipo</h5>
+                <p class="card-text">11/10/2024</p>
+                <p class="card-text">Trés bon état</p>
+                <p class="card-text">Nourriture adapté mais résuire, passé à 0.500 kg</p>
+                <p class="card-text">Rien à ajouter</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container my-3 border border-secondary rounded" id="consultations">
+
+    <h2 class="text-secondary fw-bold display-5">Consultations par animal</h1>
+        <table class="table table-striped table-hover table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Habitat</th>
+                    <th scope="col">Nombre de consultation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Simba</td>
+                    <td>Savane</td>
+                    <td>37</td>
+                </tr>
+                <tr>
+                    <td>Ipo</td>
+                    <td>Marais</td>
+                    <td>16</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+
+<div class="container my-3 border border-secondary rounded bg-success" id="user">
+    <h2 class="text-secondary fw-bold display-5">Création d'un nouvel utilisateur</h2>
+    <div class="row">
+        <form action="post" class="mb-3" id="user-creation">
+            <h6 class="text-primary fw-bold">Utilisateur: </h6>
+            <div class="mb-3 d-flex g-1 justify-content-start gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="typeUserInput" id="employe">
+                    <label class="form-check-label" for="employe">
+                        Employé
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="typeUserInput" id="veterinaire">
+                    <label class="form-check-label" for="veterinaire">
+                        Vétérinaire
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label text-secondary fw-bold">Email: </label>
+                <input type="email" id="email" name="email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label text-secondary fw-bold">Username: </label>
+                <input type="text" id="username" name="username" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label text-secondary fw-bold">Mot de passe: </label>
+                <input type="password" id="password" name="password" class="form-control">
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-secondary">Envoyer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container my-3 border border-secondary rounded" id="avis">
+    <h2 class="text-secondary fw-bold display-5">Derniers avis</h2>
+    <div class="m-3 row d-flex justify-content-between align-items-center">
+        <div class="p-0 col-sm-12 col-md-4 col-lg-4 border border-secondary rounded">
+            <div class="d-flex flex-column justify-content-between align-items-center bg-success rounded">
+                <p class="m-1">17.08.2024</p>
+                <h3 class="text-secondary fw-bold">Gérard</h3>
+                <p class="text-secondary">Trés beau zoo</p>
+                <div class="d-flex">
+                    <button class="btn btn-secondary m-2">Valider</button>
+                    <button class="btn btn-danger m-2">Supprimer</button>
+                </div>
+            </div>
+        </div>
+        <div class="p-0 col-sm-12 col-md-4 col-lg-4 border border-secondary rounded">
+            <div class="d-flex flex-column justify-content-between align-items-center bg-success rounded">
+                <p class="m-1">17.08.2024</p>
+                <h3 class="text-secondary fw-bold">Gérard</h3>
+                <p class="text-secondary">Trés beau zoo</p>
+                <div class="d-flex">
+                    <button class="btn btn-secondary m-2">Valider</button>
+                    <button class="btn btn-danger m-2">Supprimer</button>
+                </div>
+            </div>
+        </div>
+        <div class="p-0 col-sm-12 col-md-4 col-lg-4 border border-secondary rounded">
+            <div class="d-flex flex-column justify-content-between align-items-center bg-success rounded">
+                <p class="m-1">17.08.2024</p>
+                <h3 class="text-secondary fw-bold">Gérard</h3>
+                <p class="text-secondary">Trés beau zoo</p>
+                <div class="d-flex">
+                    <button class="btn btn-secondary m-2">Valider</button>
+                    <button class="btn btn-danger m-2">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
