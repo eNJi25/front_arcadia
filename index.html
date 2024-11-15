@@ -44,7 +44,11 @@
                             <a class="nav-link text-success" href="/contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-success" href="/tableau">Tableau de bord</a>
+                            <a class="nav-link text-success" href="/tableau" data-show="admin">Tableau de bord</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link text-success" id="signOutBtn"
+                                data-show="connected">Déconnexion</button>
                         </li>
                     </ul>
                 </div>
@@ -83,6 +87,7 @@
         </div>
     </footer>
 
+    <script src="assets/js/script.js"></script>
     <script type="module" src="Router/router.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
