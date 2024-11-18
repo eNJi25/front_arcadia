@@ -1,11 +1,9 @@
 const avisContainer = document.getElementById("avis-container");
 
 if (avisContainer) {
-  // Effectuer le fetch dès que le script est chargé
   fetch("https://127.0.0.1:8000/api/avis/valides")
     .then((response) => response.json())
     .then((avis) => {
-      console.log(avis); // Vérifie la structure de la réponse
 
       avis.forEach((avisItem) => {
         const avisHTML = `
@@ -75,9 +73,7 @@ form.addEventListener("submit", async (event) => {
     avisInput.value = "";
 
     alert("Merci pour votre avis !");
-
-    // Recharge les avis après l'envoi du nouveau
-    avisContainer.innerHTML = ""; // Réinitialise l'affichage des avis
+    avisContainer.innerHTML = "";
   } catch (error) {
     alert("Une erreur est survenue, veuillez réessayer.");
   }

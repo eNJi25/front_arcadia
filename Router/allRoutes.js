@@ -10,7 +10,7 @@ export const allRoutes = [
     "/tableau",
     "Tableau de bord",
     "/pages/tableau.html",
-    ["admin"],
+    ["admin", "employee"],
     "/assets/js/tableau.js"
   ),
   new Route(
@@ -24,7 +24,7 @@ export const allRoutes = [
     "/editPassword",
     "Mot de passe oublié",
     "/pages/auth/editPassword.html",
-    ["admin"]
+    []
   ),
 ];
 //Le titre s'affiche comme ceci : Route.titre - websitename
