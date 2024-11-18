@@ -1,4 +1,4 @@
-const tokenCookieName = "accesstoken";
+const tokenCookieName = "X-AUTH-TOKEN";
 const roleCookieName = "role";
 const signOutBtn = document.getElementById("signOutBtn");
 signOutBtn.addEventListener("click", signOut);
