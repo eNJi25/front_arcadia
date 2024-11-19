@@ -21,7 +21,7 @@ fetch("https://127.0.0.1:8000/api/habitat/showAll", {
 
       habitatCard.innerHTML = `
             <div class="card">
-                <img class="card-img" src="${habitat.image}" alt="${habitat.nom}">
+                <img class="card-img" src="https://127.0.0.1:8000/${habitat.image}" alt="${habitat.nom}">
                 <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
                     <h2 class="card-title text-white">${habitat.nom}</h2>
                     <a href="/habitats" class="btn btn-secondary">Découvrir</a>
@@ -57,7 +57,7 @@ fetch("https://127.0.0.1:8000/api/services/showAll", {
       }
 
       carouselItem.innerHTML = `
-        <img src="${service.image}" class="d-block w-100" alt="${service.nom}">
+        <img src="https://127.0.0.1:8000/${service.image}" class="d-block w-100" alt="${service.nom}">
         <div class="carousel-caption d-flex justify-content-start">
             <h3>${service.nom}</h3>
         </div>
@@ -78,12 +78,12 @@ fetch("https://127.0.0.1:8000/api/animal/showAnimalsHome")
 
     if (data && data.length > 0) {
       data.forEach((item) => {
-        const animal = item.animal; // Récupérer l'animal de l'habitat
+        const animal = item.animal;
 
         const cardHTML = `
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="card">
-                            <img class="card-img" src="${animal.images[0]}" alt="${animal.prenom}">
+                            <img class="card-img" src="https://127.0.0.1:8000/${animal.images[0]}" alt="${animal.prenom}">
                             <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
                                 <h2 class="card-title text-white">${animal.prenom}</h2>
                                 <a href="#" class="btn btn-secondary">Découvrir</a>
@@ -91,7 +91,7 @@ fetch("https://127.0.0.1:8000/api/animal/showAnimalsHome")
                         </div>
                     </div>`;
 
-        animalsElement.innerHTML += cardHTML; // Ajouter la carte au DOM
+        animalsElement.innerHTML += cardHTML;
       });
     } else {
       animalsElement.innerHTML = "<p>Aucun animal trouvé.</p>";

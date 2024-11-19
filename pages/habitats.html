@@ -9,7 +9,8 @@
     <h2 class="text-center fw-bold text-secondary">Espace administrateur</h2>
     <div class="d-flex g-3 justify-content-center">
         <div class="d-flex justify-content-center m-2 p-0">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AjoutAnimalModal">Ajouter un
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#AjoutAnimalModal">Ajouter un
                 animal</button>
         </div>
         <div class="d-flex justify-content-center m-2 p-0">
@@ -21,9 +22,7 @@
 
 <section id="habitats-container"></section>
 
-
-<!-- Modal Ajout d'animal -->
-
+<!-- Modal pour ajouter un animal -->
 <div class="modal fade" id="AjoutAnimalModal" tabindex="-1" aria-labelledby="AjoutAnimalModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -32,36 +31,43 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="ajouter-animal-form" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="prenomAnimalInput" class="form-label text-primary fw-bold">Prénom de
                             l'animal</label>
-                        <input type="text" class="form-control" id="nomAnimalInput" name="nomAnimalInput">
+                        <input type="text" class="form-control" id="prenomAnimalInput" name="prenomAnimalInput">
                     </div>
                     <div class="mb-3">
-                        <label for="nomServiceInput" class="form-label text-primary fw-bold">Race de l'animal</label>
-                        <input type="text" class="form-control" id="nomAnimalInput" name="nomAnimalInput">
+                        <label for="raceAnimalInput" class="form-label text-primary fw-bold">Race de l'animal</label>
+                        <input type="text" class="form-control" id="raceAnimalInput" name="raceAnimalInput">
                     </div>
                     <div class="mb-3">
-                        <label for="PhotoAnimalInput" class="form-label text-primary fw-bold">Photo de l'animal</label>
-                        <input type="file" class="form-control" id="PhotoAnimalInput" name="PhotoAnimalInput">
+                        <label for="etatAnimalInput" class="form-label text-primary fw-bold">Etat de l'animal</label>
+                        <input type="text" class="form-control" id="etatAnimalInput" name="etatAnimalInput">
+                    </div>
+                    <div class="mb-3">
+                        <label for="photoAnimalInput" class="form-label text-primary fw-bold">Photo de l'animal</label>
+                        <input type="file" class="form-control" id="photoAnimalInput" name="photo">
                     </div>
                     <h6 class="text-primary fw-bold">Habitat de l'animal</h6>
                     <div class="mb-3 d-flex g-1 justify-content-between">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="habitatAnimal" id="savane">
+                            <input class="form-check-input" type="radio" name="habitatAnimal" id="savane"
+                                value="Savane">
                             <label class="form-check-label" for="savane">
                                 Savane
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="habitatAnimal" id="jungle">
+                            <input class="form-check-input" type="radio" name="habitatAnimal" id="jungle"
+                                value="Jungle">
                             <label class="form-check-label" for="jungle">
                                 Jungle
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="habitatAnimal" id="marais">
+                            <input class="form-check-input" type="radio" name="habitatAnimal" id="marais"
+                                value="Marais">
                             <label class="form-check-label" for="marais">
                                 Marais
                             </label>
@@ -76,8 +82,8 @@
     </div>
 </div>
 
-<!-- Modal modification habitat-->
 
+<!-- Modal modification habitat-->
 <div class="modal fade" id="ModificationHabitatModal" tabindex="-1" aria-labelledby="ModificationHabitatModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -91,25 +97,7 @@
             <div class="modal-body">
                 <form>
                     <h6 class="text-primary fw-bold">Habitat à modifier</h6>
-                    <div class="mb-3 d-flex g-1 justify-content-between">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="NomHabitatInput" id="savane">
-                            <label class="form-check-label" for="savane">
-                                Savane
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="NomHabitatInput" id="jungle">
-                            <label class="form-check-label" for="jungle">
-                                Jungle
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="NomHabitatInput" id="marais">
-                            <label class="form-check-label" for="marais">
-                                Marais
-                            </label>
-                        </div>
+                    <div id="habitatSelectionContainer" class="mb-3 d-flex g-1 justify-content-between">
                     </div>
                     <div class="mb-3">
                         <label for="nomHabitatInput" class="form-label text-primary fw-bold">Nom de l'habitat</label>
@@ -127,7 +115,8 @@
                         <input type="file" class="form-control" name="ImageHabitatInput" id="ImageHabitatInput">
                     </div>
                     <div class="text-center mb-3">
-                        <button type="button" class="btn btn-primary text-white">Enregistrer</button>
+                        <button type="button" class="btn btn-primary text-white"
+                            id="saveHabitatChanges">Enregistrer</button>
                     </div>
                 </form>
             </div>
