@@ -1,10 +1,113 @@
+// Fetch des habitats
+
+fetch("https://127.0.0.1:8000/api/habitat/showAll", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des habitats");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    const habitatContainer = document.getElementById("habitat-container");
+
+    data.forEach((habitat) => {
+      const habitatCard = document.createElement("div");
+      habitatCard.classList.add("col-sm-12", "col-md-4", "col-lg-4");
+
+      habitatCard.innerHTML = `
+            <div class="card">
+                <img class="card-img" src="${habitat.image}" alt="${habitat.nom}">
+                <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
+                    <h2 class="card-title text-white">${habitat.nom}</h2>
+                    <a href="/habitats" class="btn btn-secondary">Découvrir</a>
+                </div>
+            </div>
+        `;
+
+      habitatContainer.appendChild(habitatCard);
+    });
+  })
+  .catch((error) => {
+    console.error("Erreur lors de la récupération des habitats:", error);
+  });
+
+// Fetch des services
+fetch("https://127.0.0.1:8000/api/services/showAll", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    const carouselContainer = document.getElementById("carouselItemsContainer");
+    let isActive = true;
+
+    data.forEach((service, index) => {
+      const carouselItem = document.createElement("div");
+      carouselItem.classList.add("carousel-item");
+      if (isActive) {
+        carouselItem.classList.add("active");
+        isActive = false;
+      }
+
+      carouselItem.innerHTML = `
+        <img src="${service.image}" class="d-block w-100" alt="${service.nom}">
+        <div class="carousel-caption d-flex justify-content-start">
+            <h3>${service.nom}</h3>
+        </div>
+      `;
+
+      carouselContainer.appendChild(carouselItem);
+    });
+  })
+  .catch((error) => {
+    console.error("Erreur lors de la récupération des services:", error);
+  });
+
+//Fetch des animaux
+fetch("https://127.0.0.1:8000/api/animal/showAnimalsHome")
+  .then((response) => response.json())
+  .then((data) => {
+    const animalsElement = document.getElementById("animals");
+
+    if (data && data.length > 0) {
+      data.forEach((item) => {
+        const animal = item.animal; // Récupérer l'animal de l'habitat
+
+        const cardHTML = `
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="card">
+                            <img class="card-img" src="${animal.images[0]}" alt="${animal.prenom}">
+                            <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
+                                <h2 class="card-title text-white">${animal.prenom}</h2>
+                                <a href="#" class="btn btn-secondary">Découvrir</a>
+                            </div>
+                        </div>
+                    </div>`;
+
+        animalsElement.innerHTML += cardHTML; // Ajouter la carte au DOM
+      });
+    } else {
+      animalsElement.innerHTML = "<p>Aucun animal trouvé.</p>";
+    }
+  })
+  .catch((error) => {
+    console.error("Erreur lors de la récupération des animaux:", error);
+  });
+
+// Fetch des avis
 const avisContainer = document.getElementById("avis-container");
 
 if (avisContainer) {
   fetch("https://127.0.0.1:8000/api/avis/valides")
     .then((response) => response.json())
     .then((avis) => {
-
       avis.forEach((avisItem) => {
         const avisHTML = `
                     <div class="p-2 col-sm-12 col-md-4 col-lg-4">
@@ -32,6 +135,8 @@ if (avisContainer) {
 } else {
   console.error("Élément #avis-container introuvable");
 }
+
+// Fetch de l'envoi d'un avis
 
 const form = document.getElementById("avis-form");
 const usernameInput = document.getElementById("usernameInput");

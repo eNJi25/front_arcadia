@@ -26,34 +26,7 @@
 <section class="habitat m-3">
     <div class="container-fluid">
         <h2 class="text-center text-secondary my-3">Nos différents habitats</h2>
-        <div class="row justify-content-center g-3">
-            <div class="col-sm-12 col-md-4 col-lg-4">
-                <div class="card">
-                    <img class="card-img" src="../assets/images/habitats/savane.jpg" alt="">
-                    <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
-                        <h2 class="card-title text-white">SAVANE</h2>
-                        <a href="/habitats" class="btn btn-secondary">Découvrir</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4">
-                <div class="card">
-                    <img class="card-img" src="../assets/images/habitats/jungle.jpg" alt="">
-                    <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
-                        <h2 class="card-title text-white">JUNGLE</h2>
-                        <a href="/habitats" class="btn btn-secondary">Découvrir</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4">
-                <div class="card">
-                    <img class="card-img" src="../assets/images/habitats/marais.jpg" alt="">
-                    <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
-                        <h2 class="card-title text-white">MARAIS</h2>
-                        <a href="/habitats" class="btn btn-secondary">Découvrir</a>
-                    </div>
-                </div>
-            </div>
+        <div class="row justify-content-center g-3" id="habitat-container">
         </div>
     </div>
 </section>
@@ -62,26 +35,7 @@
     <h2 class="text-center text-secondary my-3">Nos services</h2>
     <div class="container-fluid p-0 mb-3">
         <div id="carouselServiceCaptions" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="../assets/images/services/train.jpg" class="d-block w-100" alt="Visite en train du zoo">
-                    <div class="carousel-caption d-flex justify-content-start">
-                        <h5>Visite du zoo<br>en petit train</h5>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="../assets/images/services/restauration.jpg" class="d-block w-100"
-                        alt="Restauration sur place">
-                    <div class="carousel-caption d-flex justify-content-start">
-                        <h5>Restauration sur place</h5>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="../assets/images/services/visite.jpg" class="d-block w-100" alt="Visite guidée du zoo">
-                    <div class="carousel-caption d-flex justify-content-start">
-                        <h5>Visite guidée</h5>
-                    </div>
-                </div>
+            <div class="carousel-inner" id="carouselItemsContainer">
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselServiceCaptions"
                 data-bs-slide="prev">
@@ -95,7 +49,6 @@
             </button>
         </div>
     </div>
-
     <div class="d-flex justify-content-center">
         <a href="/services" class="btn btn-secondary text-success">Découvrir tout nos services</a>
     </div>
@@ -104,34 +57,7 @@
 <section class="animaux m-3">
     <div class="container-fluid">
         <h2 class="text-center text-secondary my-3">Nos animaux</h2>
-        <div class="row justify-content-center g-3">
-            <div class="col-sm-12 col-md-4 col-lg-4">
-                <div class="card">
-                    <img class="card-img" src="../assets/images/animaux/savane/simba.jpg" alt="lion">
-                    <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
-                        <h2 class="card-title text-white">Simba</h2>
-                        <a href="#" class="btn btn-secondary">Découvrir</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4">
-                <div class="card">
-                    <img class="card-img" src="../assets/images/animaux/jungle/rafiki.jpg" alt="singe">
-                    <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
-                        <h2 class="card-title text-white">Rafiki</h2>
-                        <a href="#" class="btn btn-secondary">Découvrir</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4">
-                <div class="card">
-                    <img class="card-img" src="../assets/images/animaux/marais/ipo.jpg" alt="hippopotame">
-                    <div class="d-flex flex-column justify-content-between align-items-center card-img-overlay">
-                        <h2 class="card-title text-white">Ipo</h2>
-                        <a href="#" class="btn btn-secondary">Découvrir</a>
-                    </div>
-                </div>
-            </div>
+        <div class="row justify-content-center g-3" id="animals">
         </div>
     </div>
 </section>
