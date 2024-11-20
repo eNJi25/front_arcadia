@@ -4,10 +4,8 @@ fetch("https://127.0.0.1:8000/api/habitat/showAll")
   .then((habitats) => {
     const habitatsContainer = document.getElementById("habitats-container");
     habitats.forEach((habitat) => {
-      // Créer la section de l'habitat
       const habitatSection = document.createElement("section");
       habitatSection.id = habitat.nom.toLowerCase();
-
       habitatSection.innerHTML = `
                     <div class="container-fluid p-0">
                         <h2 class="text-center text-secondary mb-3">${habitat.nom}</h2>
@@ -33,12 +31,10 @@ fetch("https://127.0.0.1:8000/api/habitat/showAll")
             `animals-${habitat.id}`
           );
           animals.forEach((animal) => {
-            // Vérifier si l'animal a des images
             const imageSlug = animal.imageSlug;
 
             const animalCard = document.createElement("div");
             animalCard.classList.add("col-sm-12", "col-md-4", "col-lg-3");
-
             animalCard.innerHTML = `
                                 <div class="img-card">
                                     <img class="w-100 rounded" src="https://127.0.0.1:8000${imageSlug}" alt="${animal.prenom}">
@@ -74,7 +70,7 @@ document
     const habitat = document.querySelector(
       'input[name="habitatAnimal"]:checked'
     )?.value;
-    const photo = document.getElementById("photoAnimalInput").files[0]; // Récupérer le fichier photo
+    const photo = document.getElementById("photoAnimalInput").files[0];
 
     if (!prenom || !race || !etat || !habitat || !photo) {
       alert("Tous les champs sont nécessaires.");
@@ -91,9 +87,7 @@ document
     fetch("https://127.0.0.1:8000/api/animal/new", {
       method: "POST",
       body: formData,
-      headers: {
-        // Ici, je devrais ajouter le token d'authentification
-      },
+      headers: {},
     })
       .then((response) => response.json())
       .then((data) => {
@@ -111,7 +105,6 @@ document
       });
   });
 
-// Fonction pour charger les habitats dans la modal
 function chargerHabitatsDansModal() {
   fetch("https://127.0.0.1:8000/api/habitat/showAll")
     .then((response) => {
@@ -147,12 +140,10 @@ function chargerHabitatsDansModal() {
     });
 }
 
-// Listener pour charger les habitats à l'ouverture de la modal
 document
   .getElementById("ModificationHabitatModal")
   .addEventListener("show.bs.modal", chargerHabitatsDansModal);
 
-// Listener pour la soumission de la modification
 document
   .querySelector("#ModificationHabitatModal .btn-primary")
   .addEventListener("click", () => {
@@ -192,7 +183,7 @@ document
       .then((data) => {
         console.log("Habitat modifié avec succès :", data);
         alert("Habitat modifié avec succès.");
-        location.reload(); // Rafraîchit la page après la modification
+        location.reload();
       })
       .catch((error) => {
         console.error("Erreur lors de la mise à jour de l'habitat :", error);
