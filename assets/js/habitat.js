@@ -1,4 +1,4 @@
-// Fetch affichage
+// Fetch affichage des 4 derniers animaux de chaque habitat
 fetch("https://127.0.0.1:8000/api/habitat/showAll")
   .then((response) => response.json())
   .then((habitats) => {
@@ -32,26 +32,37 @@ fetch("https://127.0.0.1:8000/api/habitat/showAll")
           );
           animals.forEach((animal) => {
             const imageSlug = animal.imageSlug;
-
+            const animalID = animal.id;
             const animalCard = document.createElement("div");
             animalCard.classList.add("col-sm-12", "col-md-4", "col-lg-3");
             animalCard.innerHTML = `
-                                <div class="img-card">
-                                    <img class="w-100 rounded" src="https://127.0.0.1:8000${imageSlug}" alt="${animal.prenom}">
-                                    <div class="action-image-buttons" data-show="admin">
-                                        <button type="button" class="btn text-primary" data-bs-toggle="modal"
-                                            data-bs-target="#EditAnimalModal"><i class="bi bi-pencil-square"></i></button>
-                                        <button type="button" class="btn text-success" data-bs-toggle="modal"
-                                            data-bs-target="#RapportAnimalModal"><i class="bi bi-file-medical"></i></button>
-                                        <button type="button" class="btn text-danger" data-bs-toggle="modal"
-                                            data-bs-target="#SuppressionAnimalModal"><i class="bi bi-trash"></i></button>
-                                    </div>
-                                    <button id="info-animal" data-bs-toggle="modal" data-bs-target="#InfosAnimalModal"
-                                        class="btn btn-secondary info-animal">En savoir plus</button>
-                                </div>
-                            `;
+                <div class="img-card">
+                  <img class="w-100 rounded" src="https://127.0.0.1:8000${imageSlug}" alt="${animal.prenom}">
+                  <div class="action-image-buttons">
+                    <button type="button" class="btn text-primary edit-animal" data-id="${animal.id}" data-bs-toggle="modal" data-bs-target="#EditAnimalModal">
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" class="btn text-success create-rapport" data-id="${animalID}" data-name="${animal.prenom}"
+                      data-image="https://127.0.0.1:8000${imageSlug}" data-bs-toggle="modal" data-bs-target="#RapportAnimalModal">
+                      <i class="bi bi-file-medical"></i>
+                    </button>
+                    <button type="button" class="btn text-danger delete-animal" data-id="${animalID}" data-name="${animal.prenom}" 
+                      data-image="https://127.0.0.1:8000${imageSlug}" data-bs-toggle="modal" data-bs-target="#SuppressionAnimalModal">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                  <button class="btn btn-secondary info-animal" data-id="${animalID}" data-bs-toggle="modal" data-bs-target="#InfosAnimalModal">
+                    En savoir plus
+                  </button>
+                </div>
+      `;
 
             animalsContainer.appendChild(animalCard);
+            const rapportButton = animalCard.querySelector(".create-rapport");
+            rapportButton.addEventListener("click", function () {
+              const animalId = this.getAttribute("data-id");
+              document.getElementById("animalId").value = animalId;
+            });
           });
         })
         .catch((error) => console.error("Error fetching animals:", error));
@@ -66,20 +77,18 @@ document
 
     const prenom = document.getElementById("prenomAnimalInput").value;
     const race = document.getElementById("raceAnimalInput").value;
-    const etat = document.getElementById("etatAnimalInput").value;
     const habitat = document.querySelector(
       'input[name="habitatAnimal"]:checked'
     )?.value;
     const photo = document.getElementById("photoAnimalInput").files[0];
 
-    if (!prenom || !race || !etat || !habitat || !photo) {
+    if (!prenom || !race || !habitat || !photo) {
       alert("Tous les champs sont nécessaires.");
       return;
     }
 
     const formData = new FormData();
     formData.append("prenomAnimal", prenom);
-    formData.append("etatAnimal", etat);
     formData.append("habitatAnimal", habitat);
     formData.append("raceAnimal", race);
     formData.append("photo", photo);
@@ -95,9 +104,14 @@ document
           alert(data.message);
         } else {
           alert("Animal ajouté avec succès!");
-          document.getElementById("ajouter-animal-form").reset();
-          $("#AjoutAnimalModal").modal("hide");
         }
+      })
+      .then(() => {
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("AjoutAnimalModal")
+        );
+        modal.hide();
+        location.reload();
       })
       .catch((error) => {
         console.error("Erreur:", error);
@@ -191,37 +205,123 @@ document
       });
   });
 
-// Fetch pour un nouveau rapport vétérinaire
-const submitButton = document.querySelector("#RapportAnimalModal .btn-primary");
+// Fetch pour récupérer les informations d'un animal
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("info-animal")) {
+    const animalId = event.target.dataset.id;
 
-if (submitButton) {
-  submitButton.addEventListener("click", function () {
+    console.log("ID de l'animal : ", animalId);
+
+    fetch(`https://127.0.0.1:8000/api/animal/show/${animalId}`)
+      .then((response) => response.json())
+      .then((animal) => {
+        console.log("Données de l'animal reçues : ", animal);
+        if (animal) {
+          document.getElementById("InfosAnimalModalLabel").textContent =
+            animal.prenom || "Animal";
+
+          document.getElementById("animalDescription").textContent =
+            animal.description || "Description non disponible";
+
+          document.getElementById("lastMeal").textContent = animal.dateRepas
+            ? `${animal.dateRepas} : ${animal.quantite}kg de ${animal.nourriture}`
+            : "Aucune information sur le dernier repas";
+
+          const vetReport = animal.rapportVeterinaires?.[0];
+          document.getElementById("vetReportStatus").textContent = vetReport
+            ? vetReport.details
+            : "Aucun rapport disponible";
+          document.getElementById("vetReportDate").textContent = vetReport?.date
+            ? `le ${vetReport.date}`
+            : "";
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Erreur lors de la récupération des informations de l'animal :",
+          error
+        );
+        alert(
+          "Une erreur est survenue lors de la récupération des informations."
+        );
+      });
+  }
+});
+
+// Fetch pour modifier un animal
+document
+  .getElementById("editAnimalForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const animalId = document.querySelector(".edit-animal").dataset.id;
+    const formData = {
+      dateRepas: document.getElementById("dateRepasInput").value,
+      nourriture: document.getElementById("nourritureAnimalInput").value,
+      quantite: parseFloat(document.getElementById("quantiteInput").value) || 0,
+    };
+
+    fetch(`https://127.0.0.1:8000/api/animal/edit/${animalId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la modification de l'animal.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        alert(
+          "Les informations de l'animal ont été mises à jour avec succès !"
+        );
+        console.log("Données mises à jour :", data);
+
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("EditAnimalModal")
+        );
+        modal.hide();
+
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la modification de l'animal :", error);
+        alert("Une erreur est survenue lors de la mise à jour.");
+      });
+  });
+
+// Fetch pour un nouveau rapport vétérinaire
+document
+  .getElementById("submitRapportButton")
+  .addEventListener("click", function () {
+    const animalId = document.getElementById("animalId").value;
     const etatAnimal = document.getElementById("etatAnimalInput").value;
     const nourriturePropose = document.getElementById(
       "nourritureProposeInput"
     ).value;
-    const quantitePropose = document.getElementById(
-      "quantiteproposeInput"
-    ).value;
+    const quantitePropose =
+      parseFloat(document.getElementById("quantiteProposeInput").value) || 0;
     const dateRapport = document.getElementById("dateRapportInput").value;
-    const detailEtatFac = document.getElementById(
-      "detailEtatFacInputInput"
-    ).value;
     const detailHabitat = document.getElementById("detailHabitatInput").value;
 
-    if (!etatAnimal || !nourriturePropose || !quantitePropose || !dateRapport) {
-      alert("Veuillez remplir tous les champs obligatoires.");
+    if (!animalId || !etatAnimal) {
+      alert("L'ID de l'animal et l'état de l'animal sont requis !");
       return;
     }
 
     const formData = {
-      detail: `Etat de l'animal: ${etatAnimal}, Nourriture proposée: ${nourriturePropose}, Quantité: ${quantitePropose}kg, Date: ${dateRapport}, Détail de l\'état de l\'animal: ${detailEtatFac}, Détail de l\'habitat: ${detailHabitat}`,
-      animal: { id: 1 },
-      user: { id: 1 },
-      createdAt: dateRapport,
+      animal: animalId,
+      etat_animal: etatAnimal,
+      nourriture_propose: nourriturePropose,
+      quantite_propose: quantitePropose,
+      date_rapport: dateRapport,
+      detail_habitat: detailHabitat,
     };
 
-    fetch("https://127.0.0.1:8000/api/rapports/new", {
+    fetch("https://127.0.0.1:8000/api/rapport", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -230,17 +330,14 @@ if (submitButton) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.location) {
-          alert("Rapport créé avec succès!");
-          $("#RapportAnimalModal").modal("hide");
-          console.log("Données du rapport:", data);
-        } else {
-          alert("Erreur lors de la création du rapport.");
-        }
+        console.log("Rapport enregistré", data);
+        alert("Rapport créé avec succès");
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("RapportAnimalModal")
+        );
+        modal.hide();
       })
       .catch((error) => {
-        console.error("Erreur:", error);
-        alert("Erreur lors de l'envoi des données.");
+        console.error("Erreur lors de l'enregistrement du rapport", error);
       });
   });
-}
