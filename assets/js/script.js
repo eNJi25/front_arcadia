@@ -47,7 +47,8 @@ function eraseCookie(name) {
 }
 
 function isConnected() {
-  return getToken() !== null;
+  const token = getToken();
+  return token !== null && token !== undefined;
 }
 
 function showAndHideElementsForRoles() {
