@@ -47,7 +47,7 @@ function eraseCookie(name) {
 }
 
 function isConnected() {
-  return !(getToken() == null || getToken == undefined);
+  return getToken() !== null;
 }
 
 function showAndHideElementsForRoles() {
@@ -56,33 +56,45 @@ function showAndHideElementsForRoles() {
 
   let allElementsToEdit = document.querySelectorAll("[data-show]");
 
-  allElementsToEdit.forEach((elements) => {
-    switch (elements.dataset.show) {
+  allElementsToEdit.forEach((element) => {
+    switch (element.dataset.show) {
       case "disconnected":
         if (userConnected) {
-          elements.classList.add("d-none");
+          element.classList.add("d-none");
+        } else {
+          element.classList.remove("d-none");
         }
         break;
       case "connected":
         if (!userConnected) {
-          elements.classList.add("d-none");
+          element.classList.add("d-none");
+        } else {
+          element.classList.remove("d-none");
         }
         break;
       case "admin":
-        if (!isConnected() || role != "admin") {
-          elements.classList.add("d-none");
+        if (!userConnected || role !== "admin") {
+          element.classList.add("d-none");
+        } else {
+          element.classList.remove("d-none");
         }
         break;
       case "employee":
-        if (!isConnected() || role != "employee") {
-          elements.classList.add("d-none");
+        if (!userConnected || role !== "employee") {
+          element.classList.add("d-none");
+        } else {
+          element.classList.remove("d-none");
         }
         break;
       case "veterinaire":
-        if (!isConnected() || role != "veterinaire") {
-          elements.classList.add("d-none");
+        if (!userConnected || role !== "veterinaire") {
+          element.classList.add("d-none");
+        } else {
+          element.classList.remove("d-none");
         }
         break;
     }
   });
 }
+
+document.addEventListener("DOMContentLoaded", showAndHideElementsForRoles);

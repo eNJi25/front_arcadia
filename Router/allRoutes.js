@@ -66,12 +66,19 @@ export const allRoutes = [
     "/assets/js/animaux/jungle.js"
   ),
   new Route(
-    "/savane",
+    "/marais",
     "Animaux du marais",
     "/pages/animaux/marais.html",
     [],
     "/assets/js/animaux/marais.js"
   ),
+  new Route(
+    "/404",
+    "Page introuvable",
+    "/pages/404.html",
+    [],
+    ""
+  ),
 ];
-//Le titre s'affiche comme ceci : Route.titre - websitename
+
 export const websiteName = "Arcadia";
