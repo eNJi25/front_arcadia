@@ -13,10 +13,6 @@
                 data-bs-target="#AjoutAnimalModal">Ajouter un
                 animal</button>
         </div>
-        <div class="d-flex justify-content-center m-2 p-0">
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                data-bs-target="#ModificationHabitatModal">Modifier un habitat</button>
-        </div>
     </div>
 </div>
 
@@ -167,8 +163,7 @@
             </div>
             <div class="modal-body">
                 <form id="rapportVeterinaireForm">
-                    <!-- Champ caché pour l'ID de l'animal -->
-                    <input type="hidden" id="animalId" value="animalId"/>
+                    <input type="hidden" id="animalId" value="animalId" />
 
                     <div class="mb-3">
                         <label for="etatAnimalInput" class="form-label text-primary fw-bold">État de l'animal</label>
@@ -205,7 +200,6 @@
     </div>
 </div>
 
-
 <!-- Modal Infos Animal -->
 <div class="modal fade" id="InfosAnimalModal" tabindex="-1" aria-labelledby="InfosAnimalModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -217,19 +211,18 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <!-- Colonne pour les détails -->
-                        <div class="col-12 d-flex flex-column justify-content-around align-items-start">
-                            <!-- Dernier repas -->
-                            <div class="d-flex flex-column justify-content-between align-items-start my-3">
-                                <h6 class="text-secondary fw-bold">Dernier repas</h6>
-                                <p id="lastMeal" class="text-primary"></p>
+                        <div class="col-12">
+                            <div class="d-flex flex-column my-3">
+                                <h6 class="text-secondary fw-bold">Date du dernier repas</h6>
+                                <p id="lastMealDate" class="text-primary"></p>
                             </div>
-
-                            <!-- Dernier rapport vétérinaire -->
-                            <div class="d-flex flex-column justify-content-between align-items-start my-3">
-                                <h6 class="text-secondary fw-bold">Dernier rapport vétérinaire</h6>
-                                <p id="vetReportStatus" class="text-primary mb-1"></p>
-                                <p id="vetReportDate" class="text-primary fst-italic fw-lighter"></p>
+                            <div class="d-flex flex-column my-3">
+                                <h6 class="text-secondary fw-bold">Ce qu'il a mangé</h6>
+                                <p id="lastMealFood" class="text-primary"></p>
+                            </div>
+                            <div class="d-flex flex-column my-3">
+                                <h6 class="text-secondary fw-bold">Quantité consommée</h6>
+                                <p id="lastMealQuantity" class="text-primary"></p>
                             </div>
                         </div>
                     </div>
@@ -239,29 +232,24 @@
     </div>
 </div>
 
+
+
 <!-- Modal Suppression Animal -->
 <div class="modal fade" id="SuppressionAnimalModal" tabindex="-1" aria-labelledby="SuppressionAnimalModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title fs-5" id="SuppressionAnimalModalLabel">Êtes-vous sûr de vouloir supprimer
-                    l'animal ?</h2>
+                <h2 class="modal-title fs-5 fw-bold text-danger" id="SuppressionAnimalModalLabel"></h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form id="delete-animal-form">
-                    <div class="mb-3">
-                        <p>Nom de l'animal</p>
-                        <img src="" alt="Image de l'animal" class="rounded w-100">
-                    </div>
-                    <input type="hidden" id="delete-animal-id" name="animalId">
-                    <div class="text-center mb-3">
-                        <button type="submit" class="btn btn-danger text-white">Supprimer</button>
-                        <button type="button" class="btn btn-secondary text-white"
-                            data-bs-dismiss="modal">Annuler</button>
-                    </div>
-                </form>
+            <div class="modal-body text-center">
+                <p class="fw-bold">Voulez-vous vraiment supprimer cet animal ?</p>
+                <input type="hidden" id="delete-animal-id" name="animalId">
+                <div class="d-flex justify-content-center gap-3">
+                    <button type="button" class="btn btn-danger text-white" id="confirmDeleteButton">Supprimer</button>
+                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Annuler</button>
+                </div>
             </div>
         </div>
     </div>

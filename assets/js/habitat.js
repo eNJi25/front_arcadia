@@ -58,10 +58,83 @@ fetch("https://127.0.0.1:8000/api/habitat/showAll")
       `;
 
             animalsContainer.appendChild(animalCard);
+
             const rapportButton = animalCard.querySelector(".create-rapport");
             rapportButton.addEventListener("click", function () {
               const animalId = this.getAttribute("data-id");
               document.getElementById("animalId").value = animalId;
+            });
+
+            const infoButton = animalCard.querySelector(".info-animal");
+            infoButton.addEventListener("click", function () {
+              const animalId = this.getAttribute("data-id");
+              fetch(`https://127.0.0.1:8000/api/animal/show/${animalId}`)
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error(
+                      "Erreur lors de la récupération des informations de l'animal."
+                    );
+                  }
+                  return response.json();
+                })
+                .then((animal) => {
+                  const modalLabel = document.getElementById(
+                    "InfosAnimalModalLabel"
+                  );
+                  const lastMealDate = document.getElementById("lastMealDate");
+                  const lastMealFood = document.getElementById("lastMealFood");
+                  const lastMealQuantity =
+                    document.getElementById("lastMealQuantity");
+
+                  if (modalLabel) {
+                    modalLabel.textContent = `Informations sur ${animal.prenom}`;
+                  }
+                  if (lastMealDate) {
+                    lastMealDate.textContent = animal.date_repas
+                      ? new Date(animal.date_repas).toLocaleDateString("fr-FR")
+                      : "Non disponible";
+                  }
+                  if (lastMealFood) {
+                    lastMealFood.textContent =
+                      animal.nourriture || "Non disponible";
+                  }
+                  if (lastMealQuantity) {
+                    lastMealQuantity.textContent = animal.quantite_repas
+                      ? `${animal.quantite_repas} kg`
+                      : "Non disponible";
+                  }
+
+                  const modalElement =
+                    document.getElementById("InfosAnimalModal");
+                  if (modalElement) {
+                    const modal = new bootstrap.Modal(modalElement);
+                    modal.show();
+                  } else {
+                    console.error("La modale InfosAnimalModal n'existe pas.");
+                  }
+                })
+                .catch((error) => {
+                  console.error(
+                    "Erreur lors de la récupération des informations de l'animal :",
+                    error
+                  );
+                  alert(
+                    "Impossible de récupérer les informations de l'animal."
+                  );
+                });
+            });
+
+            const deleteButton = animalCard.querySelector(".delete-animal");
+            deleteButton.addEventListener("click", function () {
+              const animalId = this.getAttribute("data-id");
+              const animalName = this.getAttribute("data-name");
+              const animalImage = this.getAttribute("data-image");
+
+              document.getElementById("delete-animal-id").value = animalId;
+              document.getElementById(
+                "SuppressionAnimalModalLabel"
+              ).textContent = `Êtes-vous sûr de vouloir supprimer ${animalName}?`;
+              document.getElementById("delete-animal-image").src = animalImage;
             });
           });
         })
@@ -69,7 +142,7 @@ fetch("https://127.0.0.1:8000/api/habitat/showAll")
     });
   });
 
-// Fecth pour ajouter un animal
+// Fetch pour ajouter un animal
 document
   .getElementById("ajouter-animal-form")
   .addEventListener("submit", function (event) {
@@ -96,7 +169,6 @@ document
     fetch("https://127.0.0.1:8000/api/animal/new", {
       method: "POST",
       body: formData,
-      headers: {},
     })
       .then((response) => response.json())
       .then((data) => {
@@ -118,135 +190,6 @@ document
         alert("Une erreur est survenue lors de l'ajout de l'animal.");
       });
   });
-
-function chargerHabitatsDansModal() {
-  fetch("https://127.0.0.1:8000/api/habitat/showAll")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Erreur lors du chargement des habitats.");
-      }
-      return response.json();
-    })
-    .then((habitats) => {
-      const container = document.querySelector(
-        "#ModificationHabitatModal .modal-body .d-flex"
-      );
-      container.innerHTML = "";
-
-      habitats.forEach((habitat) => {
-        const inputHtml = `
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="NomHabitatInput" id="habitat-${habitat.id}" value="${habitat.id}">
-            <label class="form-check-label" for="habitat-${habitat.id}">
-              ${habitat.nom}
-            </label>
-          </div>
-        `;
-        container.insertAdjacentHTML("beforeend", inputHtml);
-      });
-    })
-    .catch((error) => {
-      console.error("Erreur lors du chargement des habitats :", error);
-      const container = document.querySelector(
-        "#ModificationHabitatModal .modal-body .d-flex"
-      );
-      container.innerHTML = "Impossible de charger les habitats.";
-    });
-}
-
-document
-  .getElementById("ModificationHabitatModal")
-  .addEventListener("show.bs.modal", chargerHabitatsDansModal);
-
-document
-  .querySelector("#ModificationHabitatModal .btn-primary")
-  .addEventListener("click", () => {
-    const selectedHabitat = document.querySelector(
-      'input[name="NomHabitatInput"]:checked'
-    );
-
-    if (!selectedHabitat) {
-      alert("Veuillez sélectionner un habitat à modifier.");
-      return;
-    }
-
-    const habitatId = selectedHabitat.value;
-    const nom = document.getElementById("nomHabitatInput").value.trim();
-    const description = document
-      .getElementById("descriptionHabitatInput")
-      .value.trim();
-    const imageInput = document.getElementById("ImageHabitatInput");
-
-    const formData = new FormData();
-    if (nom) formData.append("nom", nom);
-    if (description) formData.append("description", description);
-    if (imageInput.files.length > 0) {
-      formData.append("image", imageInput.files[0]);
-    }
-
-    fetch(`https://127.0.0.1:8000/api/habitat/edit/${habitatId}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erreur lors de la mise à jour de l'habitat.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Habitat modifié avec succès :", data);
-        alert("Habitat modifié avec succès.");
-        location.reload();
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la mise à jour de l'habitat :", error);
-        alert("Une erreur est survenue. Veuillez réessayer.");
-      });
-  });
-
-// Fetch pour récupérer les informations d'un animal
-document.addEventListener("click", function (event) {
-  if (event.target.classList.contains("info-animal")) {
-    const animalId = event.target.dataset.id;
-
-    console.log("ID de l'animal : ", animalId);
-
-    fetch(`https://127.0.0.1:8000/api/animal/show/${animalId}`)
-      .then((response) => response.json())
-      .then((animal) => {
-        console.log("Données de l'animal reçues : ", animal);
-        if (animal) {
-          document.getElementById("InfosAnimalModalLabel").textContent =
-            animal.prenom || "Animal";
-
-          document.getElementById("animalDescription").textContent =
-            animal.description || "Description non disponible";
-
-          document.getElementById("lastMeal").textContent = animal.dateRepas
-            ? `${animal.dateRepas} : ${animal.quantite}kg de ${animal.nourriture}`
-            : "Aucune information sur le dernier repas";
-
-          const vetReport = animal.rapportVeterinaires?.[0];
-          document.getElementById("vetReportStatus").textContent = vetReport
-            ? vetReport.details
-            : "Aucun rapport disponible";
-          document.getElementById("vetReportDate").textContent = vetReport?.date
-            ? `le ${vetReport.date}`
-            : "";
-        }
-      })
-      .catch((error) => {
-        console.error(
-          "Erreur lors de la récupération des informations de l'animal :",
-          error
-        );
-        alert(
-          "Une erreur est survenue lors de la récupération des informations."
-        );
-      });
-  }
-});
 
 // Fetch pour modifier un animal
 document
@@ -278,13 +221,10 @@ document
         alert(
           "Les informations de l'animal ont été mises à jour avec succès !"
         );
-        console.log("Données mises à jour :", data);
-
         const modal = bootstrap.Modal.getInstance(
           document.getElementById("EditAnimalModal")
         );
         modal.hide();
-
         location.reload();
       })
       .catch((error) => {
@@ -297,15 +237,19 @@ document
 document
   .getElementById("submitRapportButton")
   .addEventListener("click", function () {
-    const animalId = document.getElementById("animalId").value;
-    const etatAnimal = document.getElementById("etatAnimalInput").value;
-    const nourriturePropose = document.getElementById(
-      "nourritureProposeInput"
-    ).value;
+    const animalId = document.getElementById("animalId").value.trim();
+    const etatAnimal = document.getElementById("etatAnimalInput").value.trim();
+    const nourriturePropose = document
+      .getElementById("nourritureProposeInput")
+      .value.trim();
     const quantitePropose =
       parseFloat(document.getElementById("quantiteProposeInput").value) || 0;
-    const dateRapport = document.getElementById("dateRapportInput").value;
-    const detailHabitat = document.getElementById("detailHabitatInput").value;
+    const dateRapport = document
+      .getElementById("dateRapportInput")
+      .value.trim();
+    const detailHabitat = document
+      .getElementById("detailHabitatInput")
+      .value.trim();
 
     if (!animalId || !etatAnimal) {
       alert("L'ID de l'animal et l'état de l'animal sont requis !");
@@ -321,23 +265,70 @@ document
       detail_habitat: detailHabitat,
     };
 
-    fetch("https://127.0.0.1:8000/api/rapport", {
+    fetch("https://127.0.0.1:8000/api/rapports/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la création du rapport.");
+        }
+        return response.json();
+      })
       .then((data) => {
-        console.log("Rapport enregistré", data);
-        alert("Rapport créé avec succès");
+        alert("Le rapport vétérinaire a été ajouté avec succès !");
         const modal = bootstrap.Modal.getInstance(
           document.getElementById("RapportAnimalModal")
         );
         modal.hide();
+        location.reload();
       })
       .catch((error) => {
-        console.error("Erreur lors de l'enregistrement du rapport", error);
+        console.error("Erreur lors de la création du rapport :", error);
+        alert("Une erreur est survenue lors de l'ajout du rapport.");
+      });
+  });
+
+// Fetch pour supprimer un animal
+function openDeleteModal(animalId, animalName) {
+  const modalLabel = document.getElementById("SuppressionAnimalModalLabel");
+  const deleteInput = document.getElementById("delete-animal-id");
+
+  modalLabel.textContent = `Supprimer ${animalName} ?`;
+  deleteInput.value = animalId;
+
+  const modal = new bootstrap.Modal(
+    document.getElementById("SuppressionAnimalModal")
+  );
+  modal.show();
+}
+
+document
+  .getElementById("confirmDeleteButton")
+  .addEventListener("click", function () {
+    const animalId = document.getElementById("delete-animal-id").value;
+    const animalName = document
+      .getElementById("SuppressionAnimalModalLabel")
+      .textContent.split(" ")[1];
+
+    fetch(`https://127.0.0.1:8000/api/animal/delete/${animalId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la suppression de l'animal.");
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert(`L'animal ${animalName} a été supprimé avec succès !`);
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la suppression de l'animal :", error);
+        alert("Une erreur est survenue lors de la suppression.");
       });
   });
